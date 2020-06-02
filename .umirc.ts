@@ -1,4 +1,9 @@
 import { defineConfig } from 'umi';
+const CompressionPlugin = require("compression-webpack-plugin");
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg|ts|tsx)(\?.*)?$/i;
+const IS_PROD = ["production", "development"].includes(String(process.env.NODE_ENV));
+
+console.log(process.env.NODE_ENV, IS_PROD)
 
 export default defineConfig({
   nodeModulesTransform: {
@@ -40,5 +45,21 @@ export default defineConfig({
       component: '@/pages/404'
     },
   ],
-  // host: '127.0.0.1'
+  // host: '127.0.0.1',
+  chainWebpack(memo: any) {
+    memo.plugin('CompressionPlugin').use(new CompressionPlugin({
+      filename: "[path].gz[query]",
+      algorithm: "gzip",
+      test: productionGzipExtensions,
+      // 只处理大于xx字节 的文件，默认：0
+      threshold: 10240,
+      // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
+      minRatio: 0.8, // 默认: 0.8
+      // 是否删除源文件，默认: false
+      deleteOriginalAssets: false
+    }));
+  },
+  extraBabelPlugins: [
+    IS_PROD ? 'transform-remove-console' : ""
+  ],
 });

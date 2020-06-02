@@ -26,6 +26,8 @@
     "@umijs/test": "^3.2.3",
     "antd": "^4.2.5",
     "axios": "^0.19.2",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "compression-webpack-plugin": "^4.0.0",
     "lint-staged": "^10.0.7",
     "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
