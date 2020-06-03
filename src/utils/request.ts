@@ -1,4 +1,4 @@
-import { extend, RequestOptionsInit, ResponseType } from 'umi-request';
+import { extend, RequestOptionsInit } from 'umi-request';
 import { notification, message } from 'antd';
 import { history } from 'umi';
 
@@ -56,12 +56,13 @@ const request = extend({
     errorHandler, // 默认错误处理
     // credentials: 'include', // 默认请求是否带上cookie
     // responseType: 'json',
+    //  timeout: 300000, 超时
     useCache: false,
     getResponse: true,
     parseResponse: true,
     charset: 'utf8',
     mode: 'cors',
-    prefix: 'https://api.hapyun.com',
+    // prefix: 'https://api.hapyun.com', API 的域名
     headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',

@@ -4,7 +4,7 @@ const Random = Mock.Random
 
 // @ts-ignore
 Random.extend({
-  planInfo: function() {
+  planInfo: function () {
     const Info = ["吃饭", "睡觉", "打豆豆", "洗澡"];
     return this.pick(Info)
   }
@@ -25,7 +25,7 @@ Random.extend({
 //     ]
 //   },
 // })
- // umi的mock数据
+// umi的mock数据
 export default {
   'GET /fakeData': Mock.mock({
     success: true,

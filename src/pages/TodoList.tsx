@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Input, List, Button } from 'antd';
+import { Input, List, Button, Table } from 'antd';
 import { CheckOutlined, RetweetOutlined, CloseOutlined } from '@ant-design/icons';
-import loading from './Loading'
+// import loading from './Loading'
+import { connect, Dispatch } from 'umi';
+import { WorkState, Work } from '@/models/work';
+// import { work } from '@/services/api';
 
 const { Search } = Input;
 
@@ -13,9 +16,15 @@ interface TodoType {
   dataTime: string;
 }
 
+interface PropsType {
+  dispatch: Dispatch,
+  work: WorkState,
+}
+
 const InitArray: TodoType[] = [];
 
-const TodoList = () => {
+const TodoList = (props: PropsType) => {
+  const { dispatch, work } = props;
   const [data, setData] = useState<TodoType[]>([]);
   const [showArr, setShowArr] = useState<TodoType[]>([]);
 
@@ -27,7 +36,12 @@ const TodoList = () => {
       setData(list);
       setShowArr(list);
     })();
+    dispatch({
+      type: 'work/fetch',
+      payload: {},
+    })
   }, []);
+  // console.log(work);
 
   useEffect(() => {
     // setShowArr(InitArray.concat(data));
@@ -210,8 +224,44 @@ const TodoList = () => {
           )}
         />
       </div>
+      <Table
+        columns={[
+          {
+            title: 'id',
+            dataIndex: 'id',
+          },
+          {
+            title: 'content',
+            dataIndex: 'content',
+          },
+          {
+            title: 'dataTime',
+            dataIndex: 'dataTime',
+          },
+          {
+            title: 'action',
+            key: 'action',
+            render: (record: Work) => {
+              return (
+                <a>删除</a>
+              );
+            }
+          },
+        ]}
+        dataSource={work.WorlkList}
+        pagination={false}
+        rowKey="id"
+      ></Table>
     </div>
   );
 };
 
-export default TodoList;
+export default connect(({ work, loading }: {
+  work: WorkState;
+  loading: {
+    models: {
+      [key: string]: boolean;
+    };
+    effects: [string];
+  };
+}) => ({ work, loading: loading.models.work }))(TodoList);

@@ -1,9 +1,9 @@
 import { defineConfig } from 'umi';
 const CompressionPlugin = require("compression-webpack-plugin");
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg|ts|tsx)(\?.*)?$/i;
-const IS_PROD = ["production", "development"].includes(String(process.env.NODE_ENV));
+const IS_PROD = ["production", "prod"].includes(String(process.env.NODE_ENV));
 
-console.log(process.env.NODE_ENV, IS_PROD)
+// console.log(process.env.NODE_ENV, IS_PROD)
 
 export default defineConfig({
   nodeModulesTransform: {
