@@ -9,7 +9,20 @@ export interface Work {
 }
 
 export interface WorkState {
-    WorlkList: Work[],
+    WorlkList: {
+        list: Work[],
+        pagination: {
+            current: number;
+            pageSize: number;
+            total: number;
+        }
+    },
+}
+
+export interface SearchType {
+    page?: number;
+    page_size?: number;
+    total?: number;
 }
 
 export interface WorkType {
@@ -26,24 +39,40 @@ export interface WorkType {
 export default {
     namespaced: 'work',
     state: {
-        WorlkList: []
+        WorlkList: {
+            list: [],
+            pagination: {
+                current: 1,
+                pageSize: 10,
+                total: 0,
+            }
+        }
     },
     effects: {
-        *fetch(_: any, { call, put }: { call: any, put: any }) {
-            const { data } = yield call(work);
+        *fetch({ payload }: { payload: SearchType }, { call, put }: { call: any, put: any }) {
+            console.log(payload)
+            const { data } = yield call(work, payload);
             yield put({
                 type: 'saveWork',
                 payload: {
                     ...data,
+                    ...payload,
                 }
             });
         }
     },
     reducers: {
-        saveWork(state: WorkState, { payload }: { payload: { list: WorkType[] } }) {
+        saveWork(state: WorkState, { payload }: { payload: { list: Work[], page?: number; page_size?: number, total?: number } }) {
             return {
                 ...state,
-                WorlkList: payload.list,
+                WorlkList: {
+                    list: payload.list,
+                    pagination: {
+                        current: payload.page || 1,
+                        pageSize: payload.page_size || 10,
+                        total: payload.total || 0,
+                    }
+                },
             }
         }
     }

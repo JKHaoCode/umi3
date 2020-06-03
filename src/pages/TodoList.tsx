@@ -16,6 +16,12 @@ interface TodoType {
   dataTime: string;
 }
 
+interface Search {
+  current?: number;
+  pageSize?: number;
+  total?: number;
+}
+
 interface PropsType {
   dispatch: Dispatch,
   work: WorkState,
@@ -164,6 +170,17 @@ const TodoList = (props: PropsType) => {
     );
   }
 
+  function handleOnChange(pagination: Search) {
+
+    dispatch({
+      type: 'work/fetch',
+      payload: {
+        page: pagination.current,
+        page_size: pagination.pageSize,
+      }
+    });
+  }
+
 
   // console.log(showArr)
   return (
@@ -248,8 +265,9 @@ const TodoList = (props: PropsType) => {
             }
           },
         ]}
-        dataSource={work.WorlkList}
-        pagination={false}
+        dataSource={work.WorlkList.list}
+        pagination={work.WorlkList.pagination}
+        onChange={handleOnChange}
         rowKey="id"
       ></Table>
     </div>
