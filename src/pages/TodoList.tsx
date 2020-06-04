@@ -4,7 +4,7 @@ import { Input, List, Button, Table } from 'antd';
 import { CheckOutlined, RetweetOutlined, CloseOutlined } from '@ant-design/icons';
 // import loading from './Loading'
 import { connect, Dispatch } from 'umi';
-import { WorkState, Work } from '@/models/work';
+import { WorkState, Work, SearchType } from '@/models/work';
 // import { work } from '@/services/api';
 
 const { Search } = Input;
@@ -33,6 +33,7 @@ const TodoList = (props: PropsType) => {
   const { dispatch, work } = props;
   const [data, setData] = useState<TodoType[]>([]);
   const [showArr, setShowArr] = useState<TodoType[]>([]);
+  const [search, setSearch] = useState<SearchType>({});
 
   useEffect((): void => {
     (async (): Promise<void> => {
@@ -127,6 +128,23 @@ const TodoList = (props: PropsType) => {
     }
   }
 
+  function deleteWork(id: number | undefined) {
+    dispatch({
+      type: 'work/deleteWork',
+      payload: {
+        id,
+      },
+      callback: () => {
+        dispatch({
+          type: 'work/fetch',
+          payload: {
+            ...search,
+          }
+        });
+      },
+    });
+  }
+
   function todoHeader() {
     return (
       <div className={"mainHeader"}>
@@ -171,14 +189,18 @@ const TodoList = (props: PropsType) => {
   }
 
   function handleOnChange(pagination: Search) {
-
+    const search = {
+      page: pagination.current,
+      page_size: pagination.pageSize,
+    };
     dispatch({
       type: 'work/fetch',
       payload: {
-        page: pagination.current,
-        page_size: pagination.pageSize,
+        ...search,
       }
     });
+
+    setSearch(search);
   }
 
 
@@ -260,7 +282,7 @@ const TodoList = (props: PropsType) => {
             key: 'action',
             render: (record: Work) => {
               return (
-                <a>删除</a>
+                <a onClick={() => deleteWork(record.id)}>删除</a>
               );
             }
           },

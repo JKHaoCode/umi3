@@ -1,5 +1,6 @@
 import { Effect, Reducer } from 'umi';
-import { work } from '@/services/api';
+import { work, remove } from '@/services/api';
+import { message } from 'antd';
 
 export interface Work {
     id?: number;
@@ -30,6 +31,7 @@ export interface WorkType {
     state: WorkState;
     effects: {
         fetch: Effect,
+        deleteWork: Effect,
     },
     reducers: {
         saveWork: Reducer<WorkState>;
@@ -50,7 +52,7 @@ export default {
     },
     effects: {
         *fetch({ payload }: { payload: SearchType }, { call, put }: { call: any, put: any }) {
-            console.log(payload)
+            // console.log(payload)
             const { data } = yield call(work, payload);
             yield put({
                 type: 'saveWork',
@@ -59,6 +61,15 @@ export default {
                     ...payload,
                 }
             });
+        },
+        *deleteWork({ payload, callback }: { payload: SearchType, callback: () => void }, { call }: { call: any }) {
+            const { data } = yield call(remove, payload);
+            if (data.success) {
+                callback && callback();
+                message.success('删除成功');
+            } else {
+                message.error('删除失败');
+            }
         }
     },
     reducers: {
