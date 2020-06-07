@@ -29,19 +29,20 @@ interface Search {
 interface PropsType {
   dispatch: Dispatch;
   work: WorkState;
+  loading: boolean;
 }
 
 const InitArray: TodoType[] = [];
 
 const TodoList = (props: PropsType) => {
-  const { dispatch, work } = props;
+  const { dispatch, work, loading } = props;
   const [data, setData] = useState<TodoType[]>([]);
   const [showArr, setShowArr] = useState<TodoType[]>([]);
   const [search, setSearch] = useState<SearchType>({});
 
   // const { initialState, loading, error, refresh, setInitialState } = useModel('@@initialState');
   // console.log(initialState, loading, error, refresh, setInitialState)
-
+  console.log(loading);
   useEffect((): void => {
     (async (): Promise<void> => {
       const res = await axios.get('/fakeData');
@@ -234,7 +235,7 @@ const TodoList = (props: PropsType) => {
           }
           bordered
           dataSource={showArr}
-          // loading={loading}
+          loading={loading}
           renderItem={item => (
             <List.Item>
               <Button
@@ -294,6 +295,7 @@ const TodoList = (props: PropsType) => {
         pagination={work.WorlkList.pagination}
         onChange={handleOnChange}
         rowKey="id"
+        loading={loading}
       ></Table>
     </div>
   );
