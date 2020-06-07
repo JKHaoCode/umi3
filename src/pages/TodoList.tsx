@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import { Input, List, Button, Table } from 'antd';
-import { CheckOutlined, RetweetOutlined, CloseOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  RetweetOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
 // import loading from './Loading'
-import { connect, Dispatch } from 'umi';
+import { connect, Dispatch, useModel } from 'umi';
 import { WorkState, Work, SearchType } from '@/models/work';
 // import { work } from '@/services/api';
 
@@ -23,8 +27,8 @@ interface Search {
 }
 
 interface PropsType {
-  dispatch: Dispatch,
-  work: WorkState,
+  dispatch: Dispatch;
+  work: WorkState;
 }
 
 const InitArray: TodoType[] = [];
@@ -34,6 +38,9 @@ const TodoList = (props: PropsType) => {
   const [data, setData] = useState<TodoType[]>([]);
   const [showArr, setShowArr] = useState<TodoType[]>([]);
   const [search, setSearch] = useState<SearchType>({});
+
+  // const { initialState, loading, error, refresh, setInitialState } = useModel('@@initialState');
+  // console.log(initialState, loading, error, refresh, setInitialState)
 
   useEffect((): void => {
     (async (): Promise<void> => {
@@ -46,7 +53,7 @@ const TodoList = (props: PropsType) => {
     dispatch({
       type: 'work/fetch',
       payload: {},
-    })
+    });
   }, []);
   // console.log(work);
 
@@ -54,10 +61,9 @@ const TodoList = (props: PropsType) => {
     // setShowArr(InitArray.concat(data));
   }, [data]);
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
-  const [active, setActive] = useState("SHOW_ALL");
-
+  const [active, setActive] = useState('SHOW_ALL');
 
   function addTodo(content: string) {
     const newData: TodoType[] = InitArray.concat(data);
@@ -65,24 +71,24 @@ const TodoList = (props: PropsType) => {
       id: Date.now(),
       content: content,
       isDone: false,
-      dataTime: "2019-10-28"
+      dataTime: '2019-10-28',
     });
     setData(newData);
-    setInputValue("");
+    setInputValue('');
   }
 
   function showStatusList(showStatus: string) {
-    if (showStatus === "SHOW_COMPLETED") {
+    if (showStatus === 'SHOW_COMPLETED') {
       const newData = data.filter(item => item.isDone);
       setShowArr(InitArray.concat(newData));
-      setActive("SHOW_COMPLETED");
-    } else if (showStatus === "SHOW_ACTIVE") {
+      setActive('SHOW_COMPLETED');
+    } else if (showStatus === 'SHOW_ACTIVE') {
       const newData = data.filter(item => !item.isDone);
       setShowArr(InitArray.concat(newData));
-      setActive("SHOW_ACTIVE");
+      setActive('SHOW_ACTIVE');
     } else {
       setShowArr(InitArray.concat(data));
-      setActive("SHOW_ALL");
+      setActive('SHOW_ALL');
     }
   }
 
@@ -91,12 +97,12 @@ const TodoList = (props: PropsType) => {
     const index = newData.findIndex(item => item.id === id);
     newData[index].isDone = true;
     setData(newData);
-    if (active === "SHOW_ALL") {
+    if (active === 'SHOW_ALL') {
       setShowArr(newData);
     } else if (active === 'SHOW_COMPLETED') {
-      setShowArr(newData.filter(item => item.isDone))
+      setShowArr(newData.filter(item => item.isDone));
     } else {
-      setShowArr(newData.filter(item => !item.isDone))
+      setShowArr(newData.filter(item => !item.isDone));
     }
   }
 
@@ -105,12 +111,12 @@ const TodoList = (props: PropsType) => {
     const index = newData.findIndex(item => item.id === id);
     newData[index].isDone = !newData[index].isDone;
     setData(newData);
-    if (active === "SHOW_ALL") {
+    if (active === 'SHOW_ALL') {
       setShowArr(newData);
     } else if (active === 'SHOW_COMPLETED') {
-      setShowArr(newData.filter(item => item.isDone))
+      setShowArr(newData.filter(item => item.isDone));
     } else {
-      setShowArr(newData.filter(item => !item.isDone))
+      setShowArr(newData.filter(item => !item.isDone));
     }
   }
 
@@ -119,12 +125,12 @@ const TodoList = (props: PropsType) => {
     const index = newData.findIndex(item => item.id === id);
     newData.splice(index, 1);
     setData(newData);
-    if (active === "SHOW_ALL") {
+    if (active === 'SHOW_ALL') {
       setShowArr(newData);
     } else if (active === 'SHOW_COMPLETED') {
-      setShowArr(newData.filter(item => item.isDone))
+      setShowArr(newData.filter(item => item.isDone));
     } else {
-      setShowArr(newData.filter(item => !item.isDone))
+      setShowArr(newData.filter(item => !item.isDone));
     }
   }
 
@@ -139,7 +145,7 @@ const TodoList = (props: PropsType) => {
           type: 'work/fetch',
           payload: {
             ...search,
-          }
+          },
         });
       },
     });
@@ -147,17 +153,17 @@ const TodoList = (props: PropsType) => {
 
   function todoHeader() {
     return (
-      <div className={"mainHeader"}>
+      <div className={'mainHeader'}>
         任务列表
         <div className="mainHandle">
           <Button
             size="small"
             type="default"
             className={[
-              "classifyBtn",
-              active === "SHOW_ALL" ? "active" : null
-            ].join(" ")}
-            onClick={() => showStatusList("SHOW_ALL")}
+              'classifyBtn',
+              active === 'SHOW_ALL' ? 'active' : null,
+            ].join(' ')}
+            onClick={() => showStatusList('SHOW_ALL')}
           >
             全部
           </Button>
@@ -165,10 +171,10 @@ const TodoList = (props: PropsType) => {
             size="small"
             type="default"
             className={[
-              "classifyBtn",
-              active === "SHOW_COMPLETED" ? "active" : null
-            ].join(" ")}
-            onClick={() => showStatusList("SHOW_COMPLETED")}
+              'classifyBtn',
+              active === 'SHOW_COMPLETED' ? 'active' : null,
+            ].join(' ')}
+            onClick={() => showStatusList('SHOW_COMPLETED')}
           >
             已完成
           </Button>
@@ -176,10 +182,10 @@ const TodoList = (props: PropsType) => {
             size="small"
             type="default"
             className={[
-              "classifyBtn",
-              active === "SHOW_ACTIVE" ? "active" : null
-            ].join(" ")}
-            onClick={() => showStatusList("SHOW_ACTIVE")}
+              'classifyBtn',
+              active === 'SHOW_ACTIVE' ? 'active' : null,
+            ].join(' ')}
+            onClick={() => showStatusList('SHOW_ACTIVE')}
           >
             未完成
           </Button>
@@ -197,12 +203,11 @@ const TodoList = (props: PropsType) => {
       type: 'work/fetch',
       payload: {
         ...search,
-      }
+      },
     });
 
     setSearch(search);
   }
-
 
   // console.log(showArr)
   return (
@@ -225,7 +230,7 @@ const TodoList = (props: PropsType) => {
         <List
           header={todoHeader()}
           footer={
-            <div className={"mainFooter"}>共 {showArr.length} 项任务</div>
+            <div className={'mainFooter'}>共 {showArr.length} 项任务</div>
           }
           bordered
           dataSource={showArr}
@@ -234,28 +239,28 @@ const TodoList = (props: PropsType) => {
             <List.Item>
               <Button
                 size="small"
-                type={item.isDone ? "primary" : "dashed"}
+                type={item.isDone ? 'primary' : 'dashed'}
                 className="status"
               >
-                {item.isDone ? "完成" : "未完成"}
+                {item.isDone ? '完成' : '未完成'}
               </Button>
               <p className="content">{item.content}</p>
               <div className="operate">
                 {/* <span>{item.dataTime}</span> */}
                 {item.isDone ? (
-                  ""
+                  ''
                 ) : (
-                    <CheckOutlined
-                      style={{ color: "green" }}
-                      onClick={() => finishTodo(item.id)}
-                    />
-                  )}
+                  <CheckOutlined
+                    style={{ color: 'green' }}
+                    onClick={() => finishTodo(item.id)}
+                  />
+                )}
                 <RetweetOutlined
-                  style={{ color: "#E7AF62" }}
+                  style={{ color: '#E7AF62' }}
                   onClick={() => toggleTodo(item.id)}
                 />
                 <CloseOutlined
-                  style={{ color: "red" }}
+                  style={{ color: 'red' }}
                   onClick={() => deleteTodo(item.id)}
                 />
               </div>
@@ -281,10 +286,8 @@ const TodoList = (props: PropsType) => {
             title: 'action',
             key: 'action',
             render: (record: Work) => {
-              return (
-                <a onClick={() => deleteWork(record.id)}>删除</a>
-              );
-            }
+              return <a onClick={() => deleteWork(record.id)}>删除</a>;
+            },
           },
         ]}
         dataSource={work.WorlkList.list}
@@ -296,12 +299,17 @@ const TodoList = (props: PropsType) => {
   );
 };
 
-export default connect(({ work, loading }: {
-  work: WorkState;
-  loading: {
-    models: {
-      [key: string]: boolean;
+export default connect(
+  ({
+    work,
+    loading,
+  }: {
+    work: WorkState;
+    loading: {
+      models: {
+        [key: string]: boolean;
+      };
+      effects: [string];
     };
-    effects: [string];
-  };
-}) => ({ work, loading: loading.models.work }))(TodoList);
+  }) => ({ work, loading: loading.models.work }),
+)(TodoList);

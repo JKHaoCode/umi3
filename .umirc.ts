@@ -43,6 +43,7 @@ export default defineConfig({
     {
       path: '/',
       component: '@/layout/index',
+      access: 'canDeleteFoo',
       routes: [
         {
           path: '/',
@@ -51,6 +52,10 @@ export default defineConfig({
         {
           path: '/index',
           component: '@/pages/index',
+        },
+        {
+          path: '/toggle',
+          component: '@/pages/toggle/index',
         },
         {
           component: '@/pages/404',
@@ -111,4 +116,18 @@ export default defineConfig({
   //     'pathRewrite': { '^/api' : '' },
   //   },
   // },
+  antd: {},
+  dva: {
+    hmr: true,
+  },
+  locale: {
+    // default zh-CN
+    default: 'zh-CN',
+    // default true, when it is true, will use `navigator.language` overwrite default
+    antd: true,
+    baseNavigator: true,
+  },
+  dynamicImport: {
+    loading: '@/components/PageLoading/index',
+  },
 });

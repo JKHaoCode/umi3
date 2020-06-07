@@ -1,8 +1,9 @@
 // 先会跑app.tsx
+import request from '@/utils/request';
 
 // import React from 'react';
 // import { history } from 'umi';
-// 
+//
 
 // console.log(history)
 // // history 栈里的实体个数
@@ -14,8 +15,12 @@
 // console.log(history.location.search);
 // console.log(history.location.hash);
 
-
 // const unlisten = history.listen((location: { pathname: any; }, action: any) => {
 //   console.log(location.pathname, action);
 // });
 // console.log(unlisten());
+
+export async function getInitialState() {
+  const data = await request('/login');
+  return data;
+}
