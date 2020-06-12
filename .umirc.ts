@@ -23,10 +23,16 @@ export default defineConfig({
   //   logLevel: 'info',
   //   defaultSizes: 'parsed', // stat  // gzip
   // },
-  publicPath: './', // 编译后 index.html js css 前缀
+  publicPath: '/', // 编译后 index.html js css 前缀
   hash: true,
   history: {
     type: 'browser',
+  },
+  devServer: {
+    host: '0.0.0.0',
+    port: 8080,
+    https: false,
+    http2: false,
   },
   theme: {
     '@primary-color': '#1DA57A',
@@ -67,26 +73,28 @@ export default defineConfig({
     },
   ],
   // host: '127.0.0.1',
-  // chainWebpack(memo: any) {
-  //   memo.plugin('CompressionPlugin').use(new CompressionPlugin({
-  //     filename: "[path].gz[query]",
-  //     algorithm: "gzip",
-  //     test: productionGzipExtensions,
-  //     // 只处理大于xx字节 的文件，默认：0
-  //     threshold: 10240,
-  //     // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
-  //     minRatio: 0.8, // 默认: 0.8
-  //     // 是否删除源文件，默认: false
-  //     deleteOriginalAssets: true
-  //   }));
-  // },
+  chainWebpack(memo: any) {
+    memo.plugin('CompressionPlugin').use(
+      new CompressionPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: productionGzipExtensions,
+        // 只处理大于xx字节 的文件，默认：0
+        threshold: 10240,
+        // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
+        minRatio: 0.8, // 默认: 0.8
+        // 是否删除源文件，默认: false
+        deleteOriginalAssets: true,
+      }),
+    );
+  },
   // chunks: ['vendors', 'umi'],
   // chainWebpack: function (config, { webpack }) {
   //   config.merge({
   //     optimization: {
   //       minimize: true,
   //       splitChunks: {
-  //         chunks: 'all',
+  //         chunks: 'async',
   //         minSize: 30000,
   //         minChunks: 3,
   //         automaticNameDelimiter: '.',
