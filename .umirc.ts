@@ -23,7 +23,7 @@ export default defineConfig({
   //   logLevel: 'info',
   //   defaultSizes: 'parsed', // stat  // gzip
   // },
-  publicPath: '/', // 编译后 index.html js css 前缀
+  publicPath: './', // 编译后 index.html js css 前缀
   hash: true,
   history: {
     type: 'browser',
@@ -84,7 +84,7 @@ export default defineConfig({
         // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
         minRatio: 0.8, // 默认: 0.8
         // 是否删除源文件，默认: false
-        deleteOriginalAssets: true,
+        deleteOriginalAssets: process.env.NODE_ENV === 'production',
       }),
     );
   },
@@ -128,13 +128,13 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  locale: {
-    // default zh-CN
-    default: 'zh-CN',
-    // default true, when it is true, will use `navigator.language` overwrite default
-    antd: true,
-    baseNavigator: true,
-  },
+  // locale: {
+  //   // default zh-CN
+  //   default: 'zh-CN',
+  //   // default true, when it is true, will use `navigator.language` overwrite default
+  //   antd: true,
+  //   baseNavigator: true,
+  // },
   dynamicImport: {
     loading: '@/components/PageLoading/index',
   },
