@@ -60,6 +60,14 @@ export default defineConfig({
           component: '@/pages/index',
         },
         {
+          path: '/login',
+          component: '@/pages/login/index',
+        },
+        {
+          path: '/list',
+          component: '@/pages/home/index',
+        },
+        {
           path: '/toggle',
           component: '@/pages/toggle/index',
         },
