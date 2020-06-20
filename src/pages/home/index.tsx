@@ -10,7 +10,6 @@ interface PropsType {
 
 const Home: React.FC<PropsType> = props => {
   useEffect(() => {
-    console.log(1111);
     const { dispatch } = props;
     dispatch({
       type: 'login/userMe',

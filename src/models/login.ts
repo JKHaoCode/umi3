@@ -30,9 +30,9 @@ const Login: LoginInter = {
     *login({ payload }, { call, put }) {
       const { data } = yield call(loginUser, payload);
       console.log(data);
-      if (data.data && data.data.token) {
-        yield localStorage.setItem('token', data.data.token);
-
+      if (data && data.token) {
+        yield localStorage.setItem('token', data.token);
+        console.log(11111111);
         history.push({
           pathname: '/list',
         });
@@ -40,12 +40,11 @@ const Login: LoginInter = {
     },
     *userMe(_, { call, put }) {
       const { data } = yield call(user);
-
       if (data) {
         yield put({
           type: 'saveUser',
           payload: {
-            ...data.data,
+            ...data,
           },
         });
       }
@@ -54,9 +53,11 @@ const Login: LoginInter = {
 
   reducers: {
     saveUser(state, { payload }) {
+      console.log(payload);
       return {
+        ...state,
         username: {
-          ...payload.data,
+          ...payload,
         },
       };
     },

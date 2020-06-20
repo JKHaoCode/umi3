@@ -55,18 +55,23 @@ const errorHandler = (error: { response: Response }): Response => {
 const request = extend({
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
-  // responseType: 'json',
+  responseType: 'json',
   //  timeout: 300000, 超时
   useCache: false,
-  getResponse: true,
-  parseResponse: true,
-  charset: 'utf8',
+  // getResponse: true,
+  // parseResponse: true,
+  // charset: 'utf8',
   mode: 'cors',
-  // prefix: 'https://api.hapyun.com', API 的域名
+  prefix: 'http://localhost:8000', // API 的域名
   headers: {
     Accept: 'application/json',
     // 'Content-Type': 'multipart/form-data',
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Access-Control-Allow-Origin': 'http://localhost:8000',
+    'Access-Control-Allow-Headers':
+      'Origin, X-Requested-With, Content-Type, Accept',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, PUT, DELETE',
+    'Access-Control-Allow-Credentials': 'true',
   },
 });
 
@@ -102,12 +107,11 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit) => {
       options: {
         ...options,
         requestType: 'json',
-        // interceptors: true,
+        interceptors: true,
         headers: {
           ...options.headers,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
           Authorization: auth,
+          // 'Access-Control-Allow-Credentials': true,
         },
         params: {
           ...options.params,
@@ -121,10 +125,10 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit) => {
 
 request.interceptors.response.use(async (response: any) => {
   if (response.status === 401) {
-    if (location.href.indexOf('/user/login') >= 0) {
+    if (location.href.indexOf('/login') >= 0) {
       message.error('登录失败，请输入正确的邮箱或密码！', 5);
     } else {
-      history.push('/user/login');
+      history.push('/login');
       window.location.reload();
     }
   }

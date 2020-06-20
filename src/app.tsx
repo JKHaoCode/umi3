@@ -20,7 +20,7 @@ import request from '@/utils/request';
 // });
 // console.log(unlisten());
 
-export async function getInitialState() {
-  const data = await request('/login');
-  return data;
-}
+// export async function getInitialState() {
+//   const data = await request('/login');
+//   return data;
+// }

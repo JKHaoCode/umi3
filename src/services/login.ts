@@ -6,7 +6,7 @@ export interface User {
 }
 
 export async function loginUser(params: User) {
-  return request(`http://127.0.0.1:8000/auth`, {
+  return request(`/auth`, {
     method: 'POST',
     data: {
       ...params,
@@ -15,5 +15,5 @@ export async function loginUser(params: User) {
 }
 
 export async function user() {
-  return request(`http://127.0.0.1:8000/api/v1/auth/user`);
+  return request(`/api/v1/auth/user`);
 }
