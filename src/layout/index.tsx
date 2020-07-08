@@ -1,21 +1,41 @@
-import React from 'react';
-import { IRouteComponentProps } from 'umi';
+import React, { useEffect } from 'react';
+import { IRouteComponentProps, connect, Dispatch } from 'umi';
+import { LoginType } from '@/models/login';
 
-// interface propsType {
-//   children: ReactElement
-// }
+interface PropsType {
+  dispatch: Dispatch;
+  login: LoginType;
+  loading: boolean;
+}
 
-// const layout = (props: propsType) => {
+const layout = ({
+  children,
+  location,
+  route,
+  history,
+  match,
+  dispatch,
+  login,
+}: IRouteComponentProps) => {
+  useEffect(() => {
+    // const { dispatch } = props;
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch({
+        type: 'login/userMe',
+      });
+    }
+    return () => {
+      console.log(2222233);
+    };
+  }, []);
+  return (
+    <>
+      <div>{login.username && login.username.name}</div>;<div>{children}</div>
+    </>
+  );
+};
 
-//   return (
-//     <div>
-//       {props.children}
-//     </div>
-//   );
-// };
-
-// export default layout;
-
-const layout = ({ children, location, route, history, match }: IRouteComponentProps) => <div>{children}</div>
-
-export default layout;
+export default connect(({ login }: { login: LoginType }) => ({ login }))(
+  layout,
+);

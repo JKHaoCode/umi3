@@ -28,6 +28,12 @@ export default defineConfig({
   history: {
     type: 'browser',
   },
+  devServer: {
+    host: '0.0.0.0',
+    port: 8080,
+    https: false,
+    http2: false,
+  },
   theme: {
     '@primary-color': '#1DA57A',
   },
@@ -57,6 +63,14 @@ export default defineConfig({
           component: '@/pages/index',
         },
         {
+          path: '/login',
+          component: '@/pages/login/index',
+        },
+        {
+          path: '/list',
+          component: '@/pages/home/index',
+        },
+        {
           path: '/toggle',
           component: '@/pages/toggle/index',
         },
@@ -70,26 +84,28 @@ export default defineConfig({
     },
   ],
   // host: '127.0.0.1',
-  // chainWebpack(memo: any) {
-  //   memo.plugin('CompressionPlugin').use(new CompressionPlugin({
-  //     filename: "[path].gz[query]",
-  //     algorithm: "gzip",
-  //     test: productionGzipExtensions,
-  //     // 只处理大于xx字节 的文件，默认：0
-  //     threshold: 10240,
-  //     // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
-  //     minRatio: 0.8, // 默认: 0.8
-  //     // 是否删除源文件，默认: false
-  //     deleteOriginalAssets: true
-  //   }));
-  // },
+  chainWebpack(memo: any) {
+    memo.plugin('CompressionPlugin').use(
+      new CompressionPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: productionGzipExtensions,
+        // 只处理大于xx字节 的文件，默认：0
+        threshold: 10240,
+        // 示例：一个1024b大小的文件，压缩后大小为768b，minRatio : 0.75
+        minRatio: 0.8, // 默认: 0.8
+        // 是否删除源文件，默认: false
+        deleteOriginalAssets: process.env.NODE_ENV === 'production',
+      }),
+    );
+  },
   // chunks: ['vendors', 'umi'],
   // chainWebpack: function (config, { webpack }) {
   //   config.merge({
   //     optimization: {
   //       minimize: true,
   //       splitChunks: {
-  //         chunks: 'all',
+  //         chunks: 'async',
   //         minSize: 30000,
   //         minChunks: 3,
   //         automaticNameDelimiter: '.',
@@ -123,13 +139,13 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  locale: {
-    // default zh-CN
-    default: 'zh-CN',
-    // default true, when it is true, will use `navigator.language` overwrite default
-    antd: true,
-    baseNavigator: true,
-  },
+  // locale: {
+  //   // default zh-CN
+  //   default: 'zh-CN',
+  //   // default true, when it is true, will use `navigator.language` overwrite default
+  //   antd: true,
+  //   baseNavigator: true,
+  // },
   dynamicImport: {
     loading: '@/components/PageLoading/index',
   },

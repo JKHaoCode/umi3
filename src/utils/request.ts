@@ -54,18 +54,23 @@ const errorHandler = (error: { response: Response }): Response => {
 // console.log(authorizotion);
 const request = extend({
   errorHandler, // 默认错误处理
-  // credentials: 'include', // 默认请求是否带上cookie
-  // responseType: 'json',
-  timeout: 30000, // 超时
+  responseType: 'json',
+  //  timeout: 300000, 超时
   useCache: false,
-  getResponse: true,
-  parseResponse: true,
-  charset: 'utf8',
+  // getResponse: true,
+  // parseResponse: true,
+  // charset: 'utf8',
   mode: 'cors',
-  // prefix: 'https://api.hapyun.com', API 的域名
+  prefix: 'http://localhost:8000', // API 的域名
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'multipart/form-data',
+    // 'Content-Type': 'multipart/form-data',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Access-Control-Allow-Origin': 'http://localhost:8000',
+    'Access-Control-Allow-Headers':
+      'Origin, X-Requested-With, Content-Type, Accept',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, PUT, DELETE',
+    'Access-Control-Allow-Credentials': 'true',
   },
 });
 
