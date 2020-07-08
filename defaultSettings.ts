@@ -17,7 +17,7 @@ const proSettings: DefaultSettings = {
     locale: true,
   },
   title: 'App',
-  pwa: false,
+  pwa: true,
   iconfontUrl: '',
 };
 

@@ -39,7 +39,9 @@ export default defineConfig({
     ios: 10,
   },
   // layout: {},
+  // title 是标题
   routes: [
+    // exact: true 精确匹配
     {
       path: '/',
       component: '@/layout/index',
@@ -51,6 +53,7 @@ export default defineConfig({
         },
         {
           path: '/index',
+          title: 'index',
           component: '@/pages/index',
         },
         {

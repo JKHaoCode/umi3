@@ -24,24 +24,24 @@ import { history } from 'umi';
  * 异常处理程序
  */
 const errorHandler = (error: { response: Response }): Response => {
-    // @ts-ignore
-    const { response, data } = error;
-    if (response && response.status) {
-        const errorText: string = data.error;
-        const { status } = response;
+  // @ts-ignore
+  const { response, data } = error;
+  if (response && response.status) {
+    const errorText: string = data.error;
+    const { status } = response;
 
-        notification.error({
-            message: `请求错误 ${status}`,
-            description: errorText,
-            duration: 10,
-        });
-    } else if (!response) {
-        notification.error({
-            description: '您的网络发生异常，无法连接服务器',
-            message: '网络异常',
-        });
-    }
-    return response;
+    notification.error({
+      message: `请求错误 ${status}`,
+      description: errorText,
+      duration: 10,
+    });
+  } else if (!response) {
+    notification.error({
+      description: '您的网络发生异常，无法连接服务器',
+      message: '网络异常',
+    });
+  }
+  return response;
 };
 
 /**
@@ -53,20 +53,20 @@ const errorHandler = (error: { response: Response }): Response => {
 // let i = 0;
 // console.log(authorizotion);
 const request = extend({
-    errorHandler, // 默认错误处理
-    // credentials: 'include', // 默认请求是否带上cookie
-    // responseType: 'json',
-    //  timeout: 300000, 超时
-    useCache: false,
-    getResponse: true,
-    parseResponse: true,
-    charset: 'utf8',
-    mode: 'cors',
-    // prefix: 'https://api.hapyun.com', API 的域名
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-    },
+  errorHandler, // 默认错误处理
+  // credentials: 'include', // 默认请求是否带上cookie
+  // responseType: 'json',
+  timeout: 30000, // 超时
+  useCache: false,
+  getResponse: true,
+  parseResponse: true,
+  charset: 'utf8',
+  mode: 'cors',
+  // prefix: 'https://api.hapyun.com', API 的域名
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'multipart/form-data',
+  },
 });
 
 // request.use(async (ctx, next) => {
@@ -94,41 +94,41 @@ const request = extend({
 // });
 
 request.interceptors.request.use((url: string, options: RequestOptionsInit) => {
-    const auth = localStorage.getItem('token');
-    if (auth) {
-        return {
-            url,
-            options: {
-                ...options,
-                interceptors: true,
-                headers: {
-                    ...options.headers,
-                    'Access-Control-Allow-Origin': '*',
-                    Authorization: `Bearer ${auth}`,
-                },
-                params: {
-                    ...options.params,
-                },
-            },
-        };
-    }
+  const auth = localStorage.getItem('token');
+  if (auth) {
+    return {
+      url,
+      options: {
+        ...options,
+        interceptors: true,
+        headers: {
+          ...options.headers,
+          'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${auth}`,
+        },
+        params: {
+          ...options.params,
+        },
+      },
+    };
+  }
 
-    return { url, options };
+  return { url, options };
 });
 
 request.interceptors.response.use(async (response: any) => {
-    if (response.status === 401) {
-        if (location.href.indexOf('/user/login') >= 0) {
-            message.error('登录失败，请输入正确的邮箱或密码！', 5);
-        } else {
-            history.push('/user/login');
-            window.location.reload();
-        }
+  if (response.status === 401) {
+    if (location.href.indexOf('/user/login') >= 0) {
+      message.error('登录失败，请输入正确的邮箱或密码！', 5);
+    } else {
+      history.push('/user/login');
+      window.location.reload();
     }
-    if (response.url.indexOf('download') >= 0) {
-        return response.blob();
-    }
-    return response;
+  }
+  if (response.url.indexOf('download') >= 0) {
+    return response.blob();
+  }
+  return response;
 });
 
 export default request;
