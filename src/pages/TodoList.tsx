@@ -182,10 +182,9 @@ const TodoList = (props: PropsType) => {
           <Button
             size="small"
             type="default"
-            className={[
-              'classifyBtn',
-              active === 'SHOW_ACTIVE' ? 'active' : null,
-            ].join(' ')}
+            className={`classifyBtn ${
+              active === 'SHOW_ACTIVE' ? 'active' : undefined
+            }`}
             onClick={() => showStatusList('SHOW_ACTIVE')}
           >
             未完成
