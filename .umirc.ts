@@ -2,6 +2,7 @@ import { defineConfig } from 'umi';
 const CompressionPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg|ts|tsx)(\?.*)?$/i;
 const IS_PROD = ['production', 'prod'].includes(String(process.env.NODE_ENV));
+import route from './route';
 
 // console.log(process.env.NODE_ENV, IS_PROD)
 
@@ -34,6 +35,13 @@ export default defineConfig({
     https: false,
     http2: false,
   },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:9093',
+      pathRewrite: { '^/api': '' },
+      changeOrigin: true,
+    },
+  },
   theme: {
     '@primary-color': '#1DA57A',
   },
@@ -46,43 +54,7 @@ export default defineConfig({
   },
   // layout: {},
   // title 是标题
-  routes: [
-    // exact: true 精确匹配
-    {
-      path: '/',
-      component: '@/layout/index',
-      access: 'canDeleteFoo',
-      routes: [
-        {
-          path: '/',
-          redirect: '/index',
-        },
-        {
-          path: '/index',
-          title: 'index',
-          component: '@/pages/index',
-        },
-        {
-          path: '/login',
-          component: '@/pages/login/index',
-        },
-        {
-          path: '/list',
-          component: '@/pages/home/index',
-        },
-        {
-          path: '/toggle',
-          component: '@/pages/toggle/index',
-        },
-        {
-          component: '@/pages/404',
-        },
-      ],
-    },
-    {
-      component: '@/pages/404',
-    },
-  ],
+  routes: route,
   // host: '127.0.0.1',
   chainWebpack(memo: any) {
     memo.plugin('CompressionPlugin').use(

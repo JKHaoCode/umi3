@@ -1,6 +1,6 @@
 // 先会跑app.tsx
 import request from '@/utils/request';
-
+console.log('sdfasdfasdf');
 // import React from 'react';
 // import { history } from 'umi';
 //
@@ -20,7 +20,18 @@ import request from '@/utils/request';
 // });
 // console.log(unlisten());
 
-// export async function getInitialState() {
-//   const data = await request('/login');
-//   return data;
-// }
+async function getInitialState() {
+  const data = await request('/api/login');
+  return data;
+}
+
+const login = getInitialState();
+
+async function getUser(login) {
+  const data = await request('/api/users/me');
+  return data;
+}
+
+const user = getUser(login);
+
+sessionStorage.setItem('user', user);
