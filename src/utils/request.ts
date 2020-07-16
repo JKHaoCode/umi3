@@ -54,7 +54,6 @@ const errorHandler = (error: { response: Response }): Response => {
 // console.log(authorizotion);
 const request = extend({
   errorHandler, // 默认错误处理
-  // credentials: 'include', // 默认请求是否带上cookie
   responseType: 'json',
   //  timeout: 300000, 超时
   useCache: false,
@@ -106,12 +105,11 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit) => {
       url,
       options: {
         ...options,
-        requestType: 'json',
         interceptors: true,
         headers: {
           ...options.headers,
-          Authorization: auth,
-          // 'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${auth}`,
         },
         params: {
           ...options.params,
@@ -125,10 +123,10 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit) => {
 
 request.interceptors.response.use(async (response: any) => {
   if (response.status === 401) {
-    if (location.href.indexOf('/login') >= 0) {
+    if (location.href.indexOf('/user/login') >= 0) {
       message.error('登录失败，请输入正确的邮箱或密码！', 5);
     } else {
-      history.push('/login');
+      history.push('/user/login');
       window.location.reload();
     }
   }
