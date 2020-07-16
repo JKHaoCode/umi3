@@ -21,15 +21,15 @@ console.log('sdfasdfasdf');
 // console.log(unlisten());
 
 async function getInitialState() {
-  const data = await request('/api/login');
-  return data;
+    const data = await request('/api/login');
+    return data;
 }
 
 const login = getInitialState();
 
 async function getUser(login) {
-  const data = await request('/api/users/me');
-  return data;
+    const data = await request('/api/users/me');
+    return data;
 }
 
 const user = getUser(login);
