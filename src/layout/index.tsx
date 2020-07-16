@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { IRouteComponentProps, connect, Dispatch } from 'umi';
+import { IRouteComponentProps, connect, Dispatch, history } from 'umi';
 import { LoginType } from '@/models/login';
 
-interface PropsType {
+interface PropsType extends IRouteComponentProps {
   dispatch: Dispatch;
   login: LoginType;
   loading: boolean;
@@ -12,17 +12,21 @@ const layout = ({
   children,
   location,
   route,
-  history,
   match,
   dispatch,
   login,
-}: IRouteComponentProps) => {
+}: PropsType) => {
   useEffect(() => {
     // const { dispatch } = props;
     const token = localStorage.getItem('token');
     if (token) {
       dispatch({
         type: 'login/userMe',
+      });
+    } else {
+      history.push({
+        pathname: '/login',
+        query: {},
       });
     }
     return () => {
@@ -31,7 +35,8 @@ const layout = ({
   }, []);
   return (
     <>
-      <div>{login.username && login.username.name}</div>;<div>{children}</div>
+      <div>{login.username && login.username.name}</div>
+      <div>{children}</div>
     </>
   );
 };

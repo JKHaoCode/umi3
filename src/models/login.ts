@@ -33,7 +33,7 @@ const Login: LoginInter = {
       if (data && data.token) {
         yield localStorage.setItem('token', data.token);
         console.log(11111111);
-        history.push({
+        yield history.push({
           pathname: '/list',
         });
       }
