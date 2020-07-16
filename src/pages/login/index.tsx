@@ -51,7 +51,6 @@ const Login: React.FC<PropsType> = props => {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         label="Password"
         name="password"
