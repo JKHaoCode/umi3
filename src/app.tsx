@@ -1,6 +1,6 @@
-// 先会跑app.tsx
+// 先会跑app.tsx umi定义
 import request from '@/utils/request';
-console.log('sdfasdfasdf');
+// console.log('sdfasdfasdf');
 // import React from 'react';
 // import { history } from 'umi';
 //
@@ -25,13 +25,13 @@ async function getInitialState() {
     return data;
 }
 
-const login = getInitialState();
+// const login = getInitialState();
 
-async function getUser(login) {
+async function getUser() {
     const data = await request('/api/users/me');
     return data;
 }
 
-const user = getUser(login);
+// const user = getUser(login);
 
-sessionStorage.setItem('user', user);
+// sessionStorage.setItem('user', user);
