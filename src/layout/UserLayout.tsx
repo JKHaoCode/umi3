@@ -2,6 +2,7 @@ import React from 'react';
 import { IRouteComponentProps, connect, Dispatch, history } from 'umi';
 import logo from '@/assects/logo.png';
 import styles from './UserLayout.less';
+import { LoginType } from '@/models/login';
 
 interface PropsType extends IRouteComponentProps {
     dispatch: Dispatch;
@@ -21,7 +22,7 @@ const UserLayout: React.FC<PropsType> = props => {
             </div>
             <div className="copy-wthree">
                 <p>
-                    Copyright &copy; {new Date().getYear()}.Company name All
+                    Copyright &copy; {new Date().getFullYear()}.Company name All
                     rights reserved.
                 </p>
             </div>
