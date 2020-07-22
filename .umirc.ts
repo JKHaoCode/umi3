@@ -23,7 +23,7 @@ export default defineConfig({
     //   logLevel: 'info',
     //   defaultSizes: 'parsed', // stat  // gzip
     // },
-    publicPath: './', // 编译后 index.html js css 前缀
+    publicPath: '/', // 编译后 index.html js css 前缀
     hash: true,
     history: {
         type: 'browser',

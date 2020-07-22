@@ -39,6 +39,35 @@ export default [
                 component: '@/pages/toggle/index',
             },
             {
+                path: '/hooks',
+                component: '@/pages/hooks/index',
+            },
+            {
+                path: '/hooks/reducer',
+                exact: true,
+                component: '@/pages/hooks/useReducer',
+            },
+            {
+                path: '/hooks/ref',
+                component: '@/pages/hooks/ref',
+            },
+            {
+                path: '/hooks/manual',
+                component: '@/pages/hooks/manual',
+            },
+            {
+                path: '/hooks/polling',
+                component: '@/pages/hooks/polling',
+            },
+            {
+                path: '/hooks/parallel',
+                component: '@/pages/hooks/parallel',
+            },
+            {
+                path: '/hooks/mutate',
+                component: '@/pages/hooks/mutate',
+            },
+            {
                 component: '@/pages/404',
             },
         ],

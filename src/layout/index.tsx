@@ -20,17 +20,17 @@ const layout = ({
         // const { dispatch } = props;
         const token = localStorage.getItem('token');
         if (token) {
-            dispatch({
-                type: 'login/userMe',
-            });
+            // dispatch({
+            //     type: 'login/userMe',
+            // });
         } else {
-            history.push({
-                pathname: '/login',
-                query: {},
-            });
+            // history.push({
+            //     pathname: '/login',
+            //     query: {},
+            // });
         }
         return () => {
-            console.log(2222233);
+            // ssconsole.log(2222233);
         };
     }, []);
     return (
