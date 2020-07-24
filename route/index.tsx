@@ -76,6 +76,10 @@ export default [
                 component: '@/pages/useRequest/fetchs',
             },
             {
+                path: '/hooks/full',
+                component: '@/pages/hooks/fullScreen',
+            },
+            {
                 component: '@/pages/404',
             },
         ],
