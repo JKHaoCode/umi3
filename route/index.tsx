@@ -43,6 +43,14 @@ export default [
                 component: '@/pages/hooks/index',
             },
             {
+                path: '/hooks/usememo',
+                component: '@/pages/cycle/Index',
+            },
+            {
+                path: '/hooks/callback',
+                component: '@/pages/cycle/callback',
+            },
+            {
                 path: '/hooks/reducer',
                 exact: true,
                 component: '@/pages/hooks/useReducer',
@@ -78,6 +86,14 @@ export default [
             {
                 path: '/hooks/full',
                 component: '@/pages/hooks/fullScreen',
+            },
+            {
+                path: '/hooks/usedrop',
+                component: '@/pages/usedrop/index',
+            },
+            {
+                path: '/hooks/usedynamic',
+                component: '@/pages/hooks/useDynamicList',
             },
             {
                 component: '@/pages/404',

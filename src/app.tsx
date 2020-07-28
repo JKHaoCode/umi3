@@ -1,5 +1,7 @@
-// 先会跑app.tsx umi定义
+// 先会跑app.tsx umi定义 约定 src/app.tsx 为运行时配置。
 import request from '@/utils/request';
+import { IConfigFromPlugins } from '@@/core/pluginConfig';
+// import
 // console.log('sdfasdfasdf');
 // import React from 'react';
 // import { history } from 'umi';
@@ -35,3 +37,14 @@ async function getUser() {
 // const user = getUser(login);
 
 // sessionStorage.setItem('user', user);
+// 增加 路由
+export function patchRoutes({ routes }: IConfigFromPlugins) {
+    console.log(routes);
+
+    routes &&
+        routes.unshift({
+            path: '/foo',
+            exact: true,
+            component: require('@/pages/usedrop/index').default,
+        });
+}
