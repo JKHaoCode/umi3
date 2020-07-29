@@ -20,7 +20,7 @@ const Child = ({ name, change }: ChildProps): JSX.Element => {
 
 const ChildMemo = memo(Child);
 
-const Page = (props: any) => {
+const Page = (): JSX.Element => {
     const [count, setCount] = useState(0);
     const [name, setName] = useState('Child组件');
 

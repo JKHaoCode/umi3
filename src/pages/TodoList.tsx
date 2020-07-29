@@ -68,7 +68,7 @@ const TodoList = (props: PropsType) => {
 
     function addTodo(content: string) {
         const newData: TodoType[] = InitArray.concat(data);
-        console.log(newData);
+        // console.log(newData);
         newData.push({
             id: Date.now(),
             content: content,
@@ -215,7 +215,7 @@ const TodoList = (props: PropsType) => {
         setSearch(search);
     }
 
-    console.log(showArr);
+    // console.log(showArr);
     return (
         <div className="todoList">
             <div className="todoHeader">
