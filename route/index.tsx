@@ -96,6 +96,10 @@ export default [
                 component: '@/pages/hooks/useDynamicList',
             },
             {
+                path: '/hooks/app',
+                component: '@/pages/hooks/customize',
+            },
+            {
                 component: '@/pages/404',
             },
         ],
