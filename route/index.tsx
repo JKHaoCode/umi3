@@ -100,6 +100,35 @@ export default [
                 component: '@/pages/hooks/customize',
             },
             {
+                path: '/ahooks/useRequest/index',
+                component: '@/pages/ahooks/useRequest/useRequest',
+            },
+            {
+                path: '/ahooks/useRequest/manual',
+                component: '@/pages/ahooks/useRequest/manual',
+            },
+            {
+                path: '/ahooks/useRequest/polling',
+                component: '@/pages/ahooks/useRequest/pollingInterval',
+            },
+            {
+                path: '/ahooks/useRequest/fetch',
+                component: '@/pages/ahooks/useRequest/fetchKey',
+            },
+            {
+                path: '/ahooks/useRequest/rely',
+                component: '@/pages/ahooks/useRequest/rely',
+            },
+            {
+                path: '/ahooks/useRequest/debounce',
+                component: '@/pages/ahooks/useRequest/debounce',
+            },
+            // throttle
+            {
+                path: '/ahooks/useRequest/throttle',
+                component: '@/pages/ahooks/useRequest/throttle',
+            },
+            {
                 component: '@/pages/404',
             },
         ],

@@ -39,7 +39,7 @@ async function getUser() {
 // sessionStorage.setItem('user', user);
 // 增加 路由
 export function patchRoutes({ routes }: IConfigFromPlugins) {
-    console.log(routes);
+    // console.log(routes);
 
     routes &&
         routes.unshift({
