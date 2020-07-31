@@ -129,6 +129,14 @@ export default [
                 component: '@/pages/ahooks/useRequest/throttle',
             },
             {
+                path: '/ahooks/useRequest/mutate',
+                component: '@/pages/ahooks/useRequest/mutate',
+            },
+            {
+                path: '/ahooks/useRequest/refresh',
+                component: '@/pages/ahooks/useRequest/refreshDeps',
+            },
+            {
                 component: '@/pages/404',
             },
         ],
