@@ -1,6 +1,6 @@
-import { Redirect } from 'umi';
-import { useAuth } from '@umijs/preset-react';
+// import { Redirect } from 'umi';
+// import { useAuth } from '@umijs/preset-react';
 
-export default (props: any) => {
-    const {} = useAuth();
-};
+// export default (props: any) => {
+//     const {} = useAuth();
+// };
