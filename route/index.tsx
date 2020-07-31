@@ -137,6 +137,18 @@ export default [
                 component: '@/pages/ahooks/useRequest/refreshDeps',
             },
             {
+                path: '/ahooks/useAntdTable/index',
+                component: '@/pages/ahooks/useAntdTable/index',
+            },
+            {
+                path: '/ahooks/useDebounce/index',
+                component: '@/pages/ahooks/useDebounce/index',
+            },
+            {
+                path: '/ahooks/useDebounce/fn',
+                component: '@/pages/ahooks/useDebounce/fn',
+            },
+            {
                 component: '@/pages/404',
             },
         ],
