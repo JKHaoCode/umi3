@@ -5,27 +5,29 @@ import styles from './UserLayout.less';
 import { LoginType } from '@/models/login';
 
 interface PropsType extends IRouteComponentProps {
-    dispatch: Dispatch;
-    login: LoginType;
-    loading: boolean;
+  dispatch: Dispatch;
+  login: LoginType;
+  loading: boolean;
 }
 
 const UserLayout: React.FC<PropsType> = props => {
-    const { children } = props;
+  const { children } = props;
 
-    return (
-        <>
-            <h1>Login</h1>
-            <div className="w3ls-login box">
-                <img src={logo} alt="logo_img" />
-                {children}
-            </div>
-            <div className="copy-wthree">
-                <p>
-                    Copyright &copy; {new Date().getFullYear()}.Company name All
-                    rights reserved.
-                </p>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <h1>Login</h1>
+      <div className="w3ls-login box">
+        <img src={logo} alt="logo_img" />
+        {children}
+      </div>
+      <div className="copy-wthree">
+        <p>
+          Copyright &copy; {new Date().getFullYear()}.Company name All rights
+          reserved.
+        </p>
+      </div>
+    </>
+  );
 };
+
+export default UserLayout;
