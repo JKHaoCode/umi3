@@ -1,13 +1,14 @@
 import React from 'react';
-import { IRouteComponentProps, connect, Dispatch, history } from 'umi';
-import logo from '@/assects/logo.png';
+import { IRouteComponentProps, history } from 'umi';
+// import logo from '@/assects/logo.png';
 import styles from './UserLayout.less';
-import { LoginType } from '@/models/login';
-
+// import { LoginType } from '@/models/login';
+//
 interface PropsType extends IRouteComponentProps {
-  dispatch: Dispatch;
-  login: LoginType;
+  // dispatch: Dispatch;
+  // login: LoginType;
   loading: boolean;
+  // children: ReactNode,
 }
 
 const UserLayout: React.FC<PropsType> = props => {
@@ -16,11 +17,8 @@ const UserLayout: React.FC<PropsType> = props => {
   return (
     <>
       <h1>Login</h1>
-      <div className="w3ls-login box">
-        <img src={logo} alt="logo_img" />
-        {children}
-      </div>
-      <div className="copy-wthree">
+      <div>{children}</div>
+      <div className={styles['copy-wthree']}>
         <p>
           Copyright &copy; {new Date().getFullYear()}.Company name All rights
           reserved.

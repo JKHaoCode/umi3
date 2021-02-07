@@ -1,46 +1,43 @@
 import React, { useEffect } from 'react';
-import { IRouteComponentProps, connect, Dispatch, history } from 'umi';
-import { LoginType } from '@/models/login';
+import { IRouteComponentProps } from 'umi';
 
 interface PropsType extends IRouteComponentProps {
-    dispatch: Dispatch;
-    login: LoginType;
-    loading: boolean;
+  // dispatch: Dispatch;
+  // login: LoginType;
+  loading: boolean;
 }
 
 const layout = ({
-    children,
-    location,
-    route,
-    match,
-    dispatch,
-    login,
-}: PropsType) => {
-    useEffect(() => {
-        // const { dispatch } = props;
-        const token = localStorage.getItem('token');
-        if (token) {
-            // dispatch({
-            //     type: 'login/userMe',
-            // });
-        } else {
-            // history.push({
-            //     pathname: '/login',
-            //     query: {},
-            // });
-        }
-        return () => {
-            // ssconsole.log(2222233);
-        };
-    }, []);
-    return (
-        <>
-            <div>{login.username && login.username.name}</div>
-            <div>{children}</div>
-        </>
-    );
+  children,
+}: // location,
+// route,
+// match,
+// dispatch,
+// login,
+PropsType) => {
+  useEffect(() => {
+    // const { dispatch } = props;
+    const token = localStorage.getItem('token');
+    if (token) {
+      // dispatch({
+      //     type: 'login/userMe',
+      // });
+    } else {
+      // history.push({
+      //     pathname: '/login',
+      //     query: {},
+      // });
+    }
+    return () => {
+      // ssconsole.log(2222233);
+    };
+  }, []);
+  return (
+    <>
+      <div>Name</div>
+      <div>{children}</div>
+    </>
+  );
 };
 
-export default connect(({ login }: { login: LoginType }) => ({ login }))(
-    layout,
-);
+export default layout;

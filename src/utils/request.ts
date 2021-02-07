@@ -26,8 +26,9 @@ import { history } from 'umi';
 const errorHandler = (error: { response: Response }): Response => {
   // @ts-ignore
   const { response, data } = error;
+  console.log(response, data);
   if (response && response.status) {
-    const errorText: string = data.error;
+    const errorText: string = data.msg;
     const { status } = response;
 
     notification.error({
@@ -61,12 +62,12 @@ const request = extend({
   // parseResponse: true,
   // charset: 'utf8',
   mode: 'cors',
-  prefix: 'http://localhost:8000', // API 的域名
+  prefix: 'http://localhosts', // API 的域名
   headers: {
     Accept: 'application/json',
     // 'Content-Type': 'multipart/form-data',
     'Content-Type': 'application/json;charset=UTF-8',
-    'Access-Control-Allow-Origin': 'http://localhost:8000',
+    'Access-Control-Allow-Origin': 'http://localhosts',
     'Access-Control-Allow-Headers':
       'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, PUT, DELETE',

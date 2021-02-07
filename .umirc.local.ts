@@ -5,12 +5,12 @@ import { defineConfig } from 'umi';
  * @param {'abc'}} {  hash [description]
  */
 export default defineConfig({
-    hash: false,
-    title: 'abc',
-    devServer: {
-        host: '0.0.0.0',
-        port: 8000,
-        https: false,
-        http2: false,
-    },
+  hash: false,
+  // title: ,
+  devServer: {
+    host: '0.0.0.0',
+    port: 8050,
+    https: false,
+    http2: false,
+  },
 });
