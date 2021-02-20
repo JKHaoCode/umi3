@@ -26,6 +26,24 @@ export default [
         title: 'index',
         component: '@/pages/home',
       },
+      {
+        path: '/useRequest',
+        title: 'index',
+        routes: [
+          {
+            path: '/useRequest',
+            component: '@/pages/useRequest',
+          },
+          {
+            path: '/useRequest/2',
+            component: '@/pages/useRequest/2',
+          },
+          {
+            path: '/useRequest/3',
+            component: '@/pages/useRequest/3',
+          },
+        ],
+      },
       // {
       //     path: '/login',
       //     component: '@/pages/login/index',

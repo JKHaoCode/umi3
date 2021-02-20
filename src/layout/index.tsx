@@ -7,14 +7,7 @@ interface PropsType extends IRouteComponentProps {
   loading: boolean;
 }
 
-const layout = ({
-  children,
-}: // location,
-// route,
-// match,
-// dispatch,
-// login,
-PropsType) => {
+const layout = ({ children }: PropsType) => {
   useEffect(() => {
     // const { dispatch } = props;
     const token = localStorage.getItem('token');
@@ -34,7 +27,7 @@ PropsType) => {
   }, []);
   return (
     <>
-      <div>Name</div>
+      {/*<div>Name</div>*/}
       <div>{children}</div>
     </>
   );
